@@ -1,0 +1,191 @@
+﻿@model DataLayer.Core.AspNetStudent
+
+@{
+    ViewBag.Title = "Student Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <dl class="dl-horizontal">
+
+        <dt class="form-group">
+            @Html.DisplayNameFor(model => model.StudentID)
+        </dt>
+
+        <dd class="form-group">
+            @Html.DisplayFor(model => model.StudentID)
+        </dd>
+
+        <dt class="form-group">
+            @Html.DisplayNameFor(model => model.Firstname)
+        </dt>
+
+        <dd class="form-group">
+            @Html.DisplayFor(model => model.Firstname)
+        </dd>
+
+        <dt class="form-group">
+            @Html.DisplayNameFor(model => model.Lastname)
+        </dt>
+
+        <dd class="form-group">
+            @Html.DisplayFor(model => model.Lastname)
+        </dd>
+
+        <dt class="form-group">
+            @Html.DisplayNameFor(model => model.CellNumber)
+        </dt>
+
+        <dd class="form-group">
+            @Html.DisplayFor(model => model.CellNumber)
+        </dd>
+
+        <dt class="form-group">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd class="form-group">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt class="form-group">
+            @Html.DisplayNameFor(model => model.University)
+        </dt>
+
+        <dd class="form-group">
+            @Html.DisplayFor(model => model.University)
+        </dd>
+
+        <dt class="form-group">
+            @Html.DisplayNameFor(model => model.Qualification)
+        </dt>
+
+        <dd class="form-group">
+            @Html.DisplayFor(model => model.Qualification)
+        </dd>
+
+        <dt class="form-group">
+            @Html.DisplayNameFor(model => model.YearofStudy)
+        </dt>
+
+        <dd class="form-group">
+        
+            @if (Model.YearofStudy != null)
+            {
+                var yearStudy = Model.YearofStudy.Value.ToString("dd/MM/yyyy");
+                @Html.DisplayFor(model => yearStudy)
+            }
+            else
+            {
+                //Model.YearofStudy.ToString())
+                @Html.DisplayFor(model => Model.YearofStudy.ToString())
+            }
+        </dd>
+        <dt class="form-group">
+            @Html.DisplayNameFor(model => model.YearofRequest)
+        </dt>
+
+        <dd class="form-group">
+           
+            @if (Model.YearofRequest != null)
+            {
+                var yearRequest = Model.YearofRequest.Value.ToString("dd/MM/yyyy");
+                @Html.DisplayFor(model => yearRequest)
+            }
+            else
+            {
+                //Model.YearofStudy.ToString())
+                @Html.DisplayFor(model => Model.YearofRequest.ToString())
+            }
+        </dd>
+
+        <dt class="form-group">
+            @Html.DisplayNameFor(model => model.AcademicAverage)
+        </dt>
+
+        <dd class="form-group">
+            @Html.DisplayFor(model => model.AcademicAverage)
+        </dd>
+
+        <dt class="form-group">
+            @Html.DisplayNameFor(model => model.AmountofFundingNeeded)
+        </dt>
+
+        <dd class="form-group">
+            @if (Model.AmountofFundingNeeded.HasValue)
+            {
+                @*<p>@string.Format("{0:0,0.00}", Model.AmountofFundingNeeded)</p>*@
+                var amount = string.Format("{0:0,0.00}", Model.AmountofFundingNeeded);
+                @Html.DisplayFor(model => amount)
+            }
+            else
+            {
+                <p>0.00</p>
+            }
+        </dd>
+
+        <dt class="form-group">
+            @Html.DisplayNameFor(model => model.WhatTheFundingWillBeUsedFor)
+        </dt>
+
+        <dd class="form-group">
+            @Html.DisplayFor(model => model.WhatTheFundingWillBeUsedFor)
+        </dd>
+
+        <dt class="form-group">
+            @Html.DisplayNameFor(model => model.Bio)
+        </dt>
+
+        <dd class="form-group">
+            @Html.DisplayFor(model => model.Bio)
+        </dd>
+
+        <dt class="form-group">
+            @Html.DisplayNameFor(model => model.Motivation)
+        </dt>
+
+        <dd class="form-group">
+            @Html.DisplayFor(model => model.Motivation)
+        </dd>
+
+
+
+        @*<dt class="form-group">
+                @Html.DisplayNameFor(model => model.CellNumberConfimed)
+            </dt>
+
+            <dd class="form-group">
+                @Html.DisplayFor(model => model.CellNumberConfimed)
+            </dd>*@
+
+
+        @*<dt class="form-group">
+                @Html.DisplayNameFor(model => model.EmailConfirmed)
+            </dt>
+
+            <dd class="form-group">
+                @Html.DisplayFor(model => model.EmailConfirmed)
+            </dd>*@
+
+        @*<dt class="form-group">
+                @Html.DisplayNameFor(model => model.InsertDate)
+            </dt>
+
+            <dd class="form-group">
+                @Html.DisplayFor(model => model.InsertDate)
+            </dd>
+
+            <dt class="form-group">
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </dt>
+
+            <dd class="form-group">
+                @Html.DisplayFor(model => model.ModifiedDate)
+            </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Update", "Update", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "ViewAllStudents")
+</p>

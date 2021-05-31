@@ -1,0 +1,285 @@
+﻿@model string
+@Html.AntiForgeryToken()
+<div ng-controller="homeCtrl">
+    <!--<div class="vm-call-to-action">
+        <div class="col">
+            <div class="container">
+                <p style="color:white">@Model</p>
+            </div>
+        </div>
+    </div>-->
+
+    <!-- ************************************ END OF CALL TO ACTION ************************************ -->
+    <form class="needs-validation" name="donationForm" ng-submit="submitDonation(donationForm)" novalidate>
+        <div class="row vm-row ">
+            <div class="container vm-form-border">
+                <div class="col">
+                    <h3 class="vm-form-header">Your Donation</h3>
+                    <div class="form-group">
+                        <input name="d_amount" type="number" required ng-model="donation.Amount" class="form-control" id="vm-donation-amount" placeholder="Enter donation amount">
+                        <div class="invalid-feedback">
+                            Please provide donation amount.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row vm-row">
+            <div class="container vm-form-border">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="vm-form-header">Your Details</h3>
+                        <div class="form-group">
+                            <label>In what capacity are you donating?</label> <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="vm-name-radio-capacity" id="vm-id-radio-individual" ng-model="donation.DonorType" value="Individual" checked="">
+                                <label class="form-check-label" for="vm-id-radio-individual">
+                                    Individual
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="vm-name-radio-capacity" id="vm-id-radio-organisation" ng-model="donation.DonorType" value="Organisation">
+                                <label class="form-check-label" for="vm-id-radio-organisation">
+                                    Organisation
+                                </label>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <section id="vm-id-row-individual">
+                    
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="vm-individual-first-name">First name	*</label>
+                                        <input type="text" name="firstname" minlength="2" maxlength="50" ng-model="donation.DonorDetails.FirstName" class="form-control" required id="vm-individual-first-name">
+                                        <div ng-if="donationForm.firstname.$invalid && !donationForm.firstname.$pristine" class="invalid-feedback">
+                                            Please provide first name.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="vm-individual-last-name">Last name *</label>
+                                        <input name="lastname" ng-model="donation.DonorDetails.Surname" maxlength="20" type="text" id="vm-individual-last-name" class="form-control" required>
+                                        <div class="invalid-feedback">
+                                            Please provide last name.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="vm-individual-email">Email *</label>
+                                        <input name="iemail" type="email" maxlength="50" ng-model="donation.DonorDetails.ContactPersonEmail" id="vm-individual-email" class="form-control" required>
+                                        <div class="invalid-feedback">
+                                            Please provide email.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="vm-individual-gender">Gender</label>
+                                        <select name="gender" ng-model="donation.DonorDetails.Gender" class="form-control" id="vm-individual-gender" required>
+                                            <option value="Female">Female</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="vm-individual-phone-number">Phone Number</label>
+                                        <input name="phonei" ng-model="donation.DonorDetails.ContactPersonPhoneNumber" type="tel" id="vm-individual-phone-number" class="form-control" required>
+                                        <div class="invalid-feedback">
+                                            Please provide phone number.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="vm-individual-tax-number">Tax Number</label>
+                                        <input maxlength="15" name="taxi" ng-model="donation.DonorDetails.TaxNumber" type="text" class="form-control" id="vm-individual-tax-number" required>
+                                        <div class="invalid-feedback">
+                                            Please provide tax number.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Are you a PPS Member?</label> <br>
+                                        <div class="form-check form-check-inline">
+                                            <input  class="form-check-input" ng-model="donation.DonorDetails.IsMember" type="radio" name="vm-radio-existing_member" id="vm-individual-existing-member-yes" value="true" checked="">
+                                            <label class="form-check-label" for="vm-individual-existing-member-yes">
+                                                Yes
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input  ng-model="donation.DonorDetails.IsMember" class="form-check-input" type="radio" name="vm-radio-existing_member" id="vm-individual-existing-member-no" value="false">
+                                            <label class="form-check-label" for="vm-individual-existing-member-no">
+                                                No
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" id="vm-individual-group-member-number">
+                                        <label for="vm-individual-member-number">PPS Member number: (if selected yes)</label>
+                                        <input name="memberi" ng-model="donation.DonorDetails.MembershipNumber" maxlength="50" type="text" name="vm-member_number" id="vm-individual-member-number" class="form-control" required>
+                                        <div class="invalid-feedback">
+                                            Please provide member number.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                </section>
+                <section id="vm-id-row-organisation">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vm-organisation-name-of-organisation">Name of Organisation *</label>
+                                <input name="org_name" type="text" maxlength="100" ng-model="donation.DonorDetails.CompanyName" id="vm-organisation-name-of-organisation" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    Please provide Name of Organisation.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vm-organisation-registration-number">Company Registration Number *</label>
+                                <input name="org_reg" type="text" maxlength="20" id="vm-organisation-registration-number" ng-model="donation.DonorDetails.RegistrationNumber" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    Please provide Organisation Registration Number.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vm-organisation-contact-person">Contact Person	*</label>
+                                <input name="org_person" ng-model="donation.DonorDetails.ContactPersonName" type="text" id="vm-organisation-contact-person" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                                <div class="invalid-feedback">
+                                    Please provide Organisation Contact Person.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vm-organisation-contact-person-phone-number">Contact Person Phone Number *</label>
+                                <input name="org_cphone" type="tel" id="vm-organisation-contact-person-phone-number" ng-model="donation.DonorDetails.ContactPersonPhoneNumber" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                                <div class="invalid-feedback">
+                                    Please provide Organisation Contact Person Phone Number.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vm-organisation-contact-person-email">Email *</label>
+                                <input name="org_cemail" ng-model="donation.DonorDetails.ContactPersonEmail" type="email" id="vm-organisation-contact-person-email" class="form-control ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required">
+                                <div class="invalid-feedback">
+                                    Please provide Organisation Contact Person Email.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vm-organisation-email-18a">Email where the 18A must be sent*</label>
+                                <input name="org_emailf" type="email" id="vm-organisation-email-18a" ng-model="donation.DonorDetails.CertificateEmail" class="form-control ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required">
+                                <div class="invalid-feedback">
+                                    Please provide Email where the 18A must be sent.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vm-organisation-email">Organisation Email *</label>
+                                <input name="org_emailo" type="email" ng-model="donation.DonorDetails.OrganizationEmail" id="vm-organisation-email" class="form-control ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required">
+                                <div class="invalid-feedback">
+                                    Please provide Organisation Email.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vm-organisation-phone-number">Phone Number *</label>
+                                <input name="org_phn" type="tel" id="vm-organisation-phone-number" ng-model="donation.DonorDetails.ContactPersonPhoneNumber" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                                <div class="invalid-feedback">
+                                    Please provide Organisation Phone Number.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Are you a PPS member?</label> <br>
+                                <div class="form-check form-check-inline">
+                                    <input ng-model="donation.DonorDetails.IsMember" class="form-check-input ng-pristine ng-untouched ng-valid" type="radio" name="vm-pps-member" id="vm-organisation-pps-member-yes" value="true" checked="">
+                                    <label class="form-check-label" for="vm-organisation-pps-member-yes">
+                                        Yes
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input ng-pristine ng-untouched ng-valid" type="radio" name="vm-pps-member" ng-model="donation.DonorDetails.IsMember" id="vm-organisation-pps-member-no" value="false">
+                                    <label class="form-check-label" for="vm-organisation-pps-member-no">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" id="vm-organization-group-member-number">
+                                <label for="vm-organisation-pps-member-number">PPS Member number: (if selected yes)</label>
+                                <input type="text" maxlength="50" ng-model="donation.DonorDetails.MembershipNumber" id="vm-organisation-pps-member-number" class="form-control">
+                                <div class="invalid-feedback">
+                                    Please provide member number.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </section>
+            </div>
+        </div>
+        <div class="row vm-row vm-row-submit">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                       <input type="checkbox" required name="terms"> I agree to the <u>Terms and Conditions</u> <button ng-if="donatebutton" class="btn btn-primary" type="submit">DONATE</button>
+                        {{message}}
+                        <div ng-if="loading"> 
+                            <img id="loading" style="width:10%" src=@Url.Content("~/Assets/img/loading.gif") alt="PPS Foundation Loading" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row vm-row-payments">
+                    <div class="col">
+                        <br>
+                        <p>SUPPORTED PAYMENT METHODS</p>
+                    </div>
+                </div>
+                <div class="row vm-row-payments">
+                    <div class="col">
+                        <img class="img-fluid"  src="@Url.Content("~/Assets/img/methods.png")" alt=" SUPPORTED PAYMENT METHODS">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

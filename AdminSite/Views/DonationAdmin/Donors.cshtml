@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Donation List";
+    ViewBag.SubTitle = "";
+
+}
+
+
+@Styles.Render("~/AdminLTE/plugins/daterangepicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/icheck/css-r")
+@Styles.Render("~/AdminLTE/plugins/colorpicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/timepicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/select2/css-r")
+@Styles.Render("~/AdminLTE/dist/css-r")
+@Styles.Render("~/AdminLTE/dist/css/skins-r")
+
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-lg-6">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Select A Date Range</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form">
+                <div class="box-body">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control pull-right" id="start">
+                        <input type="hidden" class="form-control pull-right" id="end">
+                        <label>Date range:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="reservation">
+                            <span class="input-group-btn">
+                                <button id="refresh" type="button" class="btn btn-info btn-flat">Search</button>
+                            </span>
+                        </div>
+                    </div>
+                       
+                        <div class="form-group">
+                            <label>Date range button:</label>
+                            <div class="input-group">
+                                <button type="button" class="btn btn-default pull-right" id="daterange-btn">
+                                    <i class="fa fa-calendar"></i> Date range picker
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                            </div>
+                        </div>
+            
+                        
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12" id="loading">
+                                    <i class="fa fa-refresh fa-spin big-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            </form>
+
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-6">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Summary</h3>
+        </div>
+        <div class="box-body">
+            
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="statusbox" class="info-box bg-green">
+                        <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Donation Received</span>
+
+                            <span id="lostliters" class="progress-description">
+
+                            </span>
+                            <span id="lostperc" class="info-box-number"></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+        </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            
+            
+            <table id="audits" class="table table-condensed dataTable">
+                <thead>
+                    <tr>
+                        <th class="text-left">Donation Date</th>
+                        <th class="text-left">Donor Type</th>
+                        <th class="text-left">Donor Name</th>
+                        <th class="text-left">Amount</th>
+                        <th class="text-left">Certificate</th>
+                        <th class="text-left"></th>
+                        <th class="text-left"></th>
+                        <th class="text-left"></th>
+                        <th class="text-left"></th>
+
+                    </tr>
+                </thead>
+                <tbody id="location" class="table-hover"></tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+            @section Scripts {
+               @Scripts.Render("~/AdminLTE/plugins/select2/js-r")
+                @Scripts.Render("~/AdminLTE/plugins/input-mask/js-r")
+                @Scripts.Render("~/AdminLTE/plugins/momentjs/js-r")
+                @Scripts.Render("~/AdminLTE/plugins/daterangepicker/js-r")
+                @Scripts.Render("~/AdminLTE/plugins/colorpicker/js-r")
+                @Scripts.Render("~/AdminLTE/plugins/timepicker/js-r")
+                @Scripts.Render("~/AdminLTE/plugins/icheck/js-r")
+                @Scripts.Render("~/Scripts/Forms/Advanced-r")
+                @Scripts.Render("~/AdminLTE/plugins/chartjs/js-r")
+                @Scripts.Render("~/AdminLTE/plugins/datatables/js-r")
+                @Scripts.Render("~/Scripts/Donation/Main-r")
+            }
+
+

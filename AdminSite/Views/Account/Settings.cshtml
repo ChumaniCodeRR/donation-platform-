@@ -1,0 +1,148 @@
+﻿@using InterfaceLayer.Models 
+@{
+    ViewBag.Title = "System User Settings";
+    ViewBag.SubTitle = "";
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Forms/Advanced/menu-r")
+}
+
+@Styles.Render("~/AdminLTE/plugins/daterangepicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/icheck/css-r")
+@Styles.Render("~/AdminLTE/plugins/colorpicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/timepicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/select2/css-r")
+@Styles.Render("~/AdminLTE/dist/css-r")
+@Styles.Render("~/AdminLTE/dist/css/skins-r")
+
+
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-lg-6">
+        <div class="box box-primary">
+     
+            <div class="box-body">
+                <div class="form-group">
+                    <label>Select User</label>
+
+                    @Html.DropDownList("userlist", new SelectList(Model.Users, "Value", "Text"), new { @class = "form-control" })
+                </div>
+               
+        
+                <div class="form-group">    
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info btn-flat" onclick="saveroles()">Save</button>
+                        </span>                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-6">
+        <div class="box box-primary">
+     
+            <div class="box-body">
+            
+                <div class="form-group">
+                    <label>Select The Role</label>
+                    <div class="form-group">
+                        @Html.DropDownList("rolelistm", new SelectList(Model.Roles, "Value", "Text"), new { @class = "form-control" })
+                        <br/><label>Role Description</label>
+                        <p id="claims"></p>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">User Role Assignment</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             
+                    
+                        <div class="col-sm-12">
+                            <table id="settings" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                <thead>
+                                    <tr role="row">
+
+                                        <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Username">Username</th>
+                                        <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="CompanyName">Email</th>
+                                        <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="CompanyName">CompanyName</th>
+                                        <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="User Approved">User Approved</th>
+                                        <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Email Verified">Email Verified</th>
+                                      
+                                        <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-sort="ascending" aria-label="RoleName">RoleName</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (UserAssignRep userassign in Model.UserAssignmnt)
+                                    { 
+                                    <tr role="row" class="" data-rowid="@userassign.Id">
+                                        <td class="sorting_1">@userassign.NameIdentifier</td>
+                                        <td>@userassign.Email</td>
+                                        <td>@userassign.CompanyName</td>
+                                        <td>@userassign.IsApproved</td>
+                                        <td>@userassign.EmailConfirmed</td>
+                                        
+                                        <td>@userassign.RoleName</td>
+                                        @*<td>
+                                                @*Html.ActionLink("Delete", "DeleteAssignment", "Client", new { id = userassign.Id }, null)
+                                        </td>*@
+                                    </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    
+                                </tfoot>
+                            </table>
+                        </div>
+               
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="pdf1">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12" id="loading">
+                            <i class="fa fa-refresh fa-spin big-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="col-xs-6">
+                <div id="pdf2"></div>
+            </div>*@
+    </div>
+
+    @Scripts.Render("~/Scripts/Plugin/PDF")
+
+
+    @section Scripts {
+        @Scripts.Render("~/AdminLTE/plugins/select2/js-r")
+        @Scripts.Render("~/AdminLTE/plugins/input-mask/js-r")
+        @Scripts.Render("~/AdminLTE/plugins/momentjs/js-r")
+        @Scripts.Render("~/AdminLTE/plugins/daterangepicker/js-r")
+        @Scripts.Render("~/AdminLTE/plugins/colorpicker/js-r")
+        @Scripts.Render("~/AdminLTE/plugins/timepicker/js-r")
+        @Scripts.Render("~/AdminLTE/plugins/icheck/js-r")
+        @Scripts.Render("~/Scripts/Forms/Advanced-r")
+        @Scripts.Render("~/Scripts/Client/Invoice-r")    
+        @Scripts.Render("~/AdminLTE/plugins/datatables/js-r")
+        @Scripts.Render("~/Scripts/Settings/Data-r")
+    }
+

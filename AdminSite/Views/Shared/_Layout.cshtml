@@ -1,0 +1,161 @@
+﻿@using WebApplication.Extensions
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PPS Admin</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="shortcut icon" type="image/jpg" href="@Url.Content("~/favicon.jpg")" />
+    <link href="~/AdminLTE/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/AdminLTE/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
+    @Styles.Render("~/AdminLTE/bootstrap/css-r")
+    @Styles.Render("~/AdminLTE/dist/css-r")
+    @Styles.Render("~/AdminLTE/dist/css/skins-r")
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NHT45D6');</script>
+    <!-- End Google Tag Manager -->
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <a href="@Url.Action("Dashboard", "Home")" class="logo">
+                <span class="logo-mini"><b>W</b>eb</span>
+                <span class="logo-lg"><b>PPS </b>Admin</span>
+            </a>
+            <nav class="navbar navbar-static-top" role="navigation">
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+
+                        @Html.Partial("_LoginPartial")
+                        <li>
+                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <aside class="main-sidebar">
+                <section class="sidebar">
+                    <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src="~/AdminLTE/dist/img/user.svg" class="img-circle" alt="User Image">
+                        </div>
+                        <div class="pull-left info">
+                            <p>@User.Identity.GetUserNameIdentifier()</p>
+                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                        </div>
+                    </div>
+
+                    <ul class="sidebar-menu">
+                        <li class="header">MENU</li>
+                        <li id="left-sidebar-menu-dashboard"><a href="@Url.Action("Dashboard", "Home")"><i class="fa fa-circle-o"></i> Dashboard</a></li>
+
+
+
+
+                        @if (User.IsInRole("Admin")) //Admin
+                        {
+                            <li class="header">USER SETTINGS</li>
+                            <li id="left-sidebar-menu-examples-invoice"><a href="@Url.Action("Settings", "Account")"><i class="fa fa-th"></i>User Role</a></li>
+                        }
+
+                        <li class="header">GENERAL REPORTS</li>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li id="left-sidebar-menu-examples-invoice">
+                                <a href="@Url.Action("DonationAdmin", "DonationAdmin")">
+                                    <i class="fa fa-truck"></i>
+                                    <text>Donation List</text>
+                                </a>
+                            </li>
+                        }
+                        <li class="header"> STUDENT INFO </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li id="left-sidebar-menu-examples-invoice">
+                                <a href="@Url.Action("Students","Students")">
+                                    <i class="fa fa-child"></i>
+                                    <text>Add Student</text>
+                                </a>
+                            </li>
+                            <li id="left-sidebar-menu-examples-invoice">
+                                <a href="@Url.Action("ViewAllStudents","Students")">
+                                    <i class="fa fa-list"></i>
+                                    <text>Student List</text>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </section>
+            </aside>
+        }
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1>
+                    @ViewBag.Title
+                    <small>@ViewBag.SubTitle</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i>@ViewBag.SubTitle</a></li>
+                    <li class="active">@ViewBag.Title</li>
+                </ol>
+            </section>
+            <section class="content">
+                @RenderBody()
+            </section>
+        </div>
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.3.2
+            </div>
+            <strong>PPS (Pty) Ltd<a href="http://www.pps.co.za">Contact: info@pps.co.za</a>.</strong>
+        </footer>
+        <aside class="control-sidebar control-sidebar-dark">
+            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+                <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane" id="control-sidebar-home-tab">
+                    <h3 class="control-sidebar-heading">Recent Activity</h3>
+                    <ul class="control-sidebar-menu">
+                    </ul>
+
+                </div>
+
+            </div>
+        </aside>
+        <div class="control-sidebar-bg"></div>
+    </div>
+
+    @Scripts.Render("~/AdminLTE/plugins/jquery/js-r")
+    @RenderSection("menu", required: false)
+    @Scripts.Render("~/AdminLTE/bootstrap/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/slimscroll/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/fastclick/js-r")
+    @Scripts.Render("~/Scripts/Shared/_Layout-r")
+    @Scripts.Render("~/AdminLTE/dist/js-r")
+    @RenderSection("scripts", required: false)
+    @RenderSection("styles", required: false)
+</body>
+</html>

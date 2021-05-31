@@ -1,0 +1,173 @@
+﻿@model List<InterfaceLayer.Models.StudentsReport>
+@{
+    ViewBag.Title = "View All Students";
+
+}
+
+
+@Styles.Render("~/AdminLTE/plugins/daterangepicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/icheck/css-r")
+@Styles.Render("~/AdminLTE/plugins/colorpicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/timepicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/select2/css-r")
+@Styles.Render("~/AdminLTE/dist/css-r")
+@Styles.Render("~/AdminLTE/dist/css/skins-r")
+
+
+
+
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: "/Students/ViewAllStudentsJson",// url
+                type: "GET", // GET or POST
+                data: {}, // null data
+                dataType: "json",// expected type in return
+                success: function (data) {
+                    var table = '<table><tr><th>FNAME</th><th>LNAME</th> <th>USERNAME</th><th>PASSWORD</th></tr>';
+                    for (var i = 0; i < data.length; i++) {
+                        table += "<tr><td>" + data[i].Firstname + "</td><td>" + data[i].lname + "</td><td>" + data[i].username + "</td><td>" + data[i].password + "</td></tr>";
+                    }
+                    table += "</table>";
+                    $('#mytbl').html(table);
+                },
+                error: function (data) {
+                    alert("Internal Server Error:\n" + data);
+                },
+            });
+        });
+    </script>*@
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#datatable').DataTable({
+            ajax: {
+                type: 'GET',
+                dataType: 'JSON',
+                url: '@Url.Action("Students", "ViewAllStudentsJson")'
+            },
+            columns: [
+                { 'data': 'Firstname' },
+                { 'data': 'Lastname' },
+
+                {
+                    'data': 'id',
+                    'render': function (data) {
+                        {
+                            return '<a  href="#" title="ویرایش" style="margin-left:10px" class="btn btn-success button"  onclick="openModal(' + data + ');"><i class="fa fa-edit"></i></a><a  href="#" title="حذف" style="margin-right:10px"  class="btn btn-danger button"  onclick="deleteUser(' + data + ')"><i class="fa fa-trash"></i></a>'
+                        }
+                    },
+                }
+            ]
+        })
+    })
+</script>
+
+<div class="row">
+    <div class="box">
+        <div class="box-body">
+            <div class="col-sm-12">
+                <div id="pdf1">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12" id="loading">
+                                <i class="fa fa-refresh fa-spin big-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table id="settings" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="First Name">First Name</th>
+                            <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Last Name">Last Name</th>
+                            <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Email">Email</th>
+                            <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Cell Number">Cell Number</th>
+                            <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Univesity">Univesity</th>
+                            <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Qualification">Qualification</th>
+                            <th class="" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Update">Update Students</th>
+                            <th class="" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Update">Student Details</th>
+                            <th class="" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Delete">Delete Students</th>
+                            @*
+                            <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Year of Study">Year of Study</th>
+                            <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Year of Request">Year of Request</th>
+                            <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Academic Average">Academic Average</th>
+                            <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Amount of Funding Needed">Amount of Funding Needed</th>
+                                <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="WhatTheFundingWillBeUsedFor">What The Funding Will Be Used For</th>
+        <th class="sorting" tabindex="0" aria-controls="settings" rowspan="1" colspan="1" aria-label="Bio">Bio</th>*@
+                        </tr>
+                        <tr>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var student in Model)
+                        {
+                            <tr role="row" class="" data-rowid="">
+                                <td>@student.Firstname</td>
+                                <td>@student.Lastname</td>
+                                <td>@student.Email</td>
+                                <td>@student.CellNumber</td>
+                                <td>@student.University</td>
+                                <td>
+                                    @student.Qualification
+                                </td>
+                                @*<
+                                <td>
+                                    @(student.YearofStudy.HasValue ? student.YearofStudy.Value.ToString("dd/MM/yyyy") : "Date is Empty")
+                                </td>
+
+                                <td>
+                                    @(student.YearofRequest.HasValue ? student.YearofRequest.Value.ToString("dd/MM/yyyy") : "Date is Empty")
+                                </td>
+                                <td>@student.AcademicAverage</td>
+                                @if (student.AmountofFundingNeeded.HasValue)
+                                {
+                                    <td>@string.Format("{0:0,0.00}", @student.AmountofFundingNeeded)</td>
+                                }
+                                else
+                                {
+                                    <td>0.00</td>
+                                }*@
+                                <td>@Html.ActionLink("Update", "Update", new { id = @student.Id })</td>
+                                <td>@Html.ActionLink("Details","Details", new { id = @student.Id })</td>
+                                <td>@Html.ActionLink("Delete", "Delete", new { id = @student.Id })</td>
+                                @* <td>@student.WhatTheFundingWillBeUsedFor</td>*@
+                                @* <td>@student.Bio</td>*@
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+
+        </div>
+        <div style="margin-top:20px">
+            @*@Html.Partial("ViewAllStudents");*@
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/AdminLTE/plugins/select2/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/input-mask/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/momentjs/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/daterangepicker/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/colorpicker/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/timepicker/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/icheck/js-r")
+    @Scripts.Render("~/Scripts/Forms/Advanced-r")
+    @Scripts.Render("~/AdminLTE/plugins/chartjs/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/datatables/js-r")
+    @*@Scripts.Render("~/Scripts/Student/Main-r")
+        @Scripts.Render("~/Scripts/Donation/Main-r")*@
+}

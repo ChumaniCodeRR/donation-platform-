@@ -1,0 +1,213 @@
+﻿@model WebApplication.Models.StudentViewModel
+
+@{
+    ViewBag.Title = "CreateStudents";
+}
+
+@Styles.Render("~/AdminLTE/plugins/daterangepicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/icheck/css-r")
+@Styles.Render("~/AdminLTE/plugins/colorpicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/timepicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/select2/css-r")
+@Styles.Render("~/AdminLTE/dist/css-r")
+@Styles.Render("~/AdminLTE/dist/css/skins-r")
+
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.core.css")"
+      rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.datepicker.css")"
+      rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.theme.css")"
+      rel="stylesheet" type="text/css" />
+<script src='@Url.Content("~/Scripts/jquery-1.12.4.js")' type='text/javascript'></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.js")' type='text/javascript'>
+</script>
+<script src='@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")' type='text/javascript'></script>
+
+
+<h3 class="box-title"></h3>
+@using (Html.BeginForm("Students", "CreateStudents", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+
+
+    <div class="row">
+        <div class="col-md-15 col-lg-7">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="form-group">
+                        <div class="col-sm-20">
+                            <label for="Firstname" class="control-label">First Name</label>
+                            @Html.TextBoxFor(m => m.Firstname, new { style = "height:28px; border-radius:3px;", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Firstname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-20">
+                            <label for="Lastname" class="control-label">Last Name</label>
+                            @Html.TextBoxFor(m => m.Lastname, new { style = "height:28px; border-radius:3px;", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Lastname)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-20">
+                            <label for="CellNumber" class="control-label">Cell Number</label>
+                            @Html.TextBoxFor(m => m.CellNumber, new { style = "height:28px; border-radius:3px;", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.CellNumber)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-20">
+                            <label for="Email" class="control-label">Email</label>
+                            @Html.TextBoxFor(m => m.Email, new { style = "height:28px; border-radius:3px;", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-20">
+                            <label for="University" class="control-label">University</label>
+                            @Html.DropDownListFor(x => x.University, new List<SelectListItem>
+                            {
+                            new SelectListItem() {Text = "Cape Peninsula University of Technology", Value="Cape Peninsula University of Technology"},
+                            new SelectListItem() {Text = "Central University of Technology", Value="Central University of Technology"},
+                            new SelectListItem() {Text = "Durban University of Technology", Value="Durban University of Technology"},
+                            new SelectListItem() {Text = "Mangosuthu University of Technology", Value="Mangosuthu University of Technology"},
+                            new SelectListItem() {Text = "Nelson Mandela University", Value="Nelson Mandela University"},
+                            new SelectListItem() {Text = "North-West University", Value="North-West University"},
+                            new SelectListItem() {Text = "Rhodes University", Value="Rhodes University"},
+                            new SelectListItem() {Text = "Sefako Makgatho Health Sciences University", Value="Sefako Makgatho Health Sciences University"},
+                            new SelectListItem() {Text = "Sol Plaatje University", Value="Sol Plaatje University"},
+                            new SelectListItem() {Text = "Stellenbosch University", Value="Stellenbosch University"},
+                            new SelectListItem() {Text = "Tshwane University of Technology", Value="Tshwane University of Technology"},
+                            new SelectListItem() {Text = "University of Cape Town", Value="University of Cape Town"},
+                            new SelectListItem() {Text = "University of Fort Hare", Value="University of Fort Hare"},
+                            new SelectListItem() {Text = "University of Johannesburg", Value="University of Johannesburg"},
+                            new SelectListItem() {Text = "University of KwaZulu-Natal", Value="University of KwaZulu-Natal"},
+                            new SelectListItem() {Text = "University of Limpopo", Value="University of Limpopo"},
+                            new SelectListItem() {Text = "University of Mpumalanga", Value="University of Mpumalanga"},
+                            new SelectListItem() {Text = "University of Pretoria", Value="University of Pretoria"},
+                            new SelectListItem() {Text = "University of South Africa", Value="University of South Africa"},
+                            new SelectListItem() {Text = "University of the Free State", Value="University of the Free State"},
+                            new SelectListItem() {Text = "University of the Western Cape", Value="University of the Western Cape"},
+                            new SelectListItem() {Text = "University of the Witwatersrand", Value="University of the Witwatersrand"},
+                            new SelectListItem() {Text = "University of Venda", Value="University of Venda"},
+                            new SelectListItem() {Text = "University of Zululand", Value="University of Zululand"},
+                            new SelectListItem() {Text = "Vaal University of Technology", Value="Vaal University of Technology"},
+                            new SelectListItem() {Text = "Walter Sisulu University", Value="Walter Sisulu University"}
+                           }, new { style = "height:28px; border-radius:1px;" })
+                            @*@Html.TextBoxFor(m => m.University, new { style = "height:28px; border-radius:3px;", @class = "form-control" })*@
+                            @Html.ValidationMessageFor(model => model.University)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-20">
+                            <label for="Qualification" class="control-label">Qualification</label>
+                            @Html.TextBoxFor(m => m.Qualification, new { style = "height:28px; border-radius:3px;", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Qualification)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-20">
+                            <label for="YearofStudy" class="control-label">Year of Study</label>
+                            @*@Html.TextBoxFor(m => m.YearofStudy, new { @class = "form-control" })*@
+                            @Html.EditorFor(m => m.YearofStudy, new { style = "height:28px; border-radius:3px;", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.YearofStudy)
+                            <label for="YearofRequest" class="control-label">Year of Request</label>
+                            @Html.EditorFor(m => m.YearofRequest, new { style = "height:28px; border-radius:3px;", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.YearofRequest)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-20">
+                            <label for="AcademicAverage" class="control-label">Academic Average</label>
+                            @Html.TextBoxFor(m => m.AcademicAverage, new { style = "height:28px; border-radius:3px;", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AcademicAverage)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="pdf1">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-12" id="loading">
+                                            <i class="fa fa-refresh fa-spin big-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="col-xs-6">
+                                <div id="pdf2"></div>
+                            </div>*@
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-20">
+                            <label for="AmountofFundingNeeded" class="control-label">Amount of Funding Needed</label>
+                            @Html.TextBoxFor(m => m.AmountofFundingNeeded, new { style = "height:28px; border-radius:3px;", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AmountofFundingNeeded)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-20">
+                            <label for="WhatTheFundingWillBeUsedFor" class="control-label">What The Funding Will Be Used For</label>
+                            @Html.TextAreaFor(m => m.WhatTheFundingWillBeUsedFor, new { style = "height:100px; border-radius:3px;", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.WhatTheFundingWillBeUsedFor)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-20">
+                            <label for="Bio" class="control-label">Bio</label>
+                            @Html.TextAreaFor(m => m.Bio, new { style = "height:100px; border-radius:3px;", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Bio)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-20">
+                            <label for="Bio" class="control-label">Motivation</label>
+                            @Html.TextAreaFor(m => m.Motivation, new { style = "height:100px; border-radius:3px;", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Motivation)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-20">
+
+                            <label for="Picture" class="control-label">Image</label>
+                            <input type="file" name="file" id="file" style="width:100%;" />
+                            @Html.ValidationMessageFor(x => x.Picture)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-10 col-md-4 col-lg-5">
+
+            <button type="submit" class="btn btn-info pull-left">Submit</button>
+
+        </div>
+    </div>
+
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".datepicker").datepicker();
+    });
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/plugins/select2/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/input-mask/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/momentjs/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/daterangepicker/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/colorpicker/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/timepicker/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/icheck/js-r")
+    @Scripts.Render("~/Scripts/Forms/Advanced-r")
+    @Scripts.Render("~/AdminLTE/plugins/chartjs/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/datatables/js-r")
+    @*@Scripts.Render("~/Scripts/Donation/Main-r")*@
+}
+

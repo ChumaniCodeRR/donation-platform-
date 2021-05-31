@@ -1,0 +1,84 @@
+﻿@model Vetro.Models.SendContactEmail
+@{
+    ViewBag.Title = "Contact Us";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+
+    <script src="~/Assets/js/app.js" type="text/javascript"></script>
+    @Styles.Render("~/Assets/css/app-r")
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NHT45D6');</script>
+    <!-- End Google Tag Manager -->
+
+</head>
+<body>
+    <div ng-controller="homeCtrl">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="row vm-row">
+                <div class="container">
+                    <div class="col">
+                        <h1>Contact Us</h1>
+                        <div>
+                            <p style="font-weight:bold;">Should you wish to contact the <br /> PPS Foundation or have any query, please call us on the details below.</p>
+                        </div>
+                        <div>
+                            <h5 style="font-weight:bold;">
+                                Tel : +27 11 644 4200
+                            </h5>
+                        </div><br /><br />
+                        <div style="border-color:#b09455; border-radius:5px; border-style:solid;">
+                            <div class="container-Contact-sub">
+                                <p style="margin-left:350px; font-size:50px;">Contact Us</p>
+                            </div>
+                            <div class="container-Contact">
+                                <div class="col-md-12">
+                                    <label for="lname">Full Name</label>
+                                    @Html.TextBoxFor(m => m.Fullname, new { placeholder = "Full Name....", @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Fullname)
+                                </div>
+                                @*<input type="text" id="lname" name="lastname" placeholder="Your last name..">*@
+
+                                <div class="col-md-12">
+                                    <label for="lname">Cell Number</label>
+                                    @Html.TextBoxFor(m => m.Cellnumber, new { placeholder = "Cell Number....", @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Cellnumber)
+                                </div>
+                                @*<input type="text" id="clnumber" name="cellnumber" placeholder="Cell Number..">*@
+                                <div class="col-md-12">
+                                    <label for="fname">Email Address</label>
+                                    @Html.TextBoxFor(m => m.Email, new { placeholder = "Email Address....", @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                </div>
+                                @*<input type="text" id="emailaddress" name="emailaddress" placeholder="Your email..">*@
+                                <div class="col-md-12">
+                                    <label for="subject">Message</label>
+                                    @Html.TextAreaFor(m => m.Message, new { placeholder = "Message....", @rows = "10", @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Message)
+                                </div>
+                                @*<textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>*@
+                                <input type="submit" class="btn btn-primary" value="Send" />
+                                @*<button class="btn btn-primary" style="width:127px;" onclick="window.location= '@Url.Action( "ContactUs", "ContactUs")'">Submit</button>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>

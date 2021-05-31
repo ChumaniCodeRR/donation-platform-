@@ -1,0 +1,130 @@
+﻿@{
+    //ViewBag.Title = "Student Donation Dashboard";
+}
+@section Menu {
+    @Scripts.Render("~/Scripts/Home/DashboardV1/menu-r")
+}
+
+@section Scripts {
+    <script src=@Url.Content("https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js") type="text/javascript"></script>
+    <script src=@Url.Content("https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.5/js/jquery.jqgrid.min.js") type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Mytable").jqGrid({
+                url: '/Home/GetData/',
+                datatype: "json",
+                colNames: ['First name', 'Last name', 'Amount Donated'],
+                colModel: [
+                    { name: 'Firstname', index: 'Firstname', width: 300 },
+                    { name: 'Lastname', index: 'Lastname', width: 300 },
+                    { name: 'Amount', index: 'Amount', width: 300 },
+                    //{ name: 'body', index: 'body', width: 350, sortable: false }
+                ],
+                rowNum: 10,
+                loadonce: true,
+                rowList: [10, 20, 30],
+                pager: '#pager2',
+                sortname: 'id',
+                viewrecords: true,
+                sortorder: "acs",
+                caption: ""
+            });
+            $("#Mytable").jqGrid('navGrid', '#pager2', { edit: true, add: false, del: false });
+        });
+    </script>
+
+    @Scripts.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/sparkline/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/jvectormap/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/daterangepicker/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/knob/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/raphael/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/morris/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/datepicker/js-r")
+    @Scripts.Render("~/Scripts/Home/DashboardV1-r")
+}
+
+@Styles.Render("~/AdminLTE/plugins/morris/css-r")
+@Styles.Render("~/AdminLTE/plugins/jvectormap/css-r")
+@Styles.Render("~/AdminLTE/plugins/datepicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/daterangepicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/css-r")
+@Styles.Render("~/AdminLTE/plugins/select2/css-r")
+@Styles.Render("~/AdminLTE/dist/css-r")
+@*@Styles.Render("~/AdminLTE/dist/css/themes-r")
+    @Styles.Render("~/AdminLTE/dist/css/jpgrid-r")*@
+
+@*@Styles.Render("~/AdminLTE/dist/css/skins-r")*@
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+@section styles{
+
+    @*<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/cupertino/jquery-ui.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.5/css/ui.jqgrid.min.css">*@
+
+}
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/cupertino/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.5/css/ui.jqgrid.min.css">
+
+
+<div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Students donations</h3>
+            </div>
+            <div class="box-body">
+                <div class="col-sm-12">
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" cellspacing="0" style="font-size:15px" width="100%" id="Mytable">
+                            </table>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div id="pager2"></div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-5">
+        <div class="small-box bg-blue">
+            <div class="inner">
+                <h3>R@(Model.High)</h3>
+                <p>Highest Donation</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-toggle-filled"></i>
+            </div>
+            <a href="@Url.Action("DonationAdmin", "DonationAdmin").Replace("/Home", "")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-lg-3 col-xs-5">
+        <div class="small-box bg-blue">
+            <div class="inner">
+                <h3>R@(Model.Low)</h3>
+                <p>Lowest Donation</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-toggle-filled"></i>
+            </div>
+            <a href="@Url.Action("DonationAdmin", "DonationAdmin").Replace("/Home", "")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+</div>
+
+
+
+@*//@section Scripts {*@
+
+
+
+@*  *@}

@@ -1,0 +1,714 @@
+﻿@model PagedList.IPagedList<DataLayer.Core.AspNetStudent>
+@using PagedList.Mvc
+@Html.AntiForgeryToken()
+
+<style>
+</style>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Required meta tags -->
+    @*<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">*@
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    @*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
+        <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/blitzer/jquery-ui.css" rel="stylesheet" type="text/css" />*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <style>
+        /*checking css*/
+    </style>
+
+
+    @Styles.Render("~/Assets/css/app-r")
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+
+
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NHT45D6');</script>
+    <!-- End Google Tag Manager -->
+
+
+    <script src="~/Assets/js/app.js" type="text/javascript"></script>
+</head>
+<body>
+    <div ng-controller="homeCtrl">
+        <!--<div class="vm-call-to-action">
+            <div class="col">
+                <div class="container">
+                    <p style="color:white">@Model</p>
+                </div>
+            </div>
+        </div>-->
+        <!-- ************************************ END OF CALL TO ACTION ************************************ -->
+        <!--**************************************Start of student action-->
+        <!-- ************************************ END OF CALL TO ACTION ************************************ -->
+
+        <form class="needs-validation" name="donationForm" ng-submit="submitDonation(donationForm)" novalidate>
+            <div class="row vm-row ">
+                <div class="container vm-form-border">
+                    <div class="col">
+                        <h3 class="vm-form-header">Your Donation</h3>
+                        <div class="row vm-row">
+                            <div class="col">
+                                <button type="button" ng-click="selectDonation(250)" class="btn btn-primary donationButton">R250</button>
+                            </div>
+                            <div class="col">
+                                <button type="button" ng-click="selectDonation(500)" class="btn btn-primary donationButton">R500</button>
+                            </div>
+                            <div class="col">
+                                <button type="button" ng-click="selectDonation(1000)" class="btn btn-primary donationButton">R1000</button>
+                            </div>
+                            <!--<div class="col">
+                                <img ng-click="selectDonation(67)" class="mandela donationButton" src="~/Assets/img/R67forMandelaDayButton.png">
+                            </div>-->
+                        </div>
+                        <div class="form-group">
+                            <input name="d_amount" min="100" type="number" required ng-model="donation.Amount" class="form-control" id="vm-donation-amount" placeholder="Enter your own amount">
+                            <div class="invalid-feedback">
+                                Please provide donation amount above R100.
+                            </div>
+                            <br>
+                            <label>Please donate a minimum of R 100 to receive a S18A</label> <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row vm-row">
+                <div class="container vm-form-border">
+                    <div class="col">
+                        <div class="row vm-row">
+                            <div class="wrapperBtn">
+                                <input type="radio" hidden="hidden" name="vm-name-radio-donatortype" ng-model="donation.DonatorType" value="Once off donation" id="option-1" checked="checked">
+                                <label class="option option-1" for="option-1">
+                                    <div class="dot"></div>
+                                    <span>Once off donation</span>
+                                </label>
+                                <input type="radio" hidden="hidden" name="vm-name-radio-donatortype" ng-model="donation.DonatorType" value="Recurring Donation" id="option-2">
+                                <label class="option option-2" for="option-2">
+                                    <div class="dot"></div>
+                                    <span>Recurring Donation</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <section id="vm-id-row-reccuting">
+                        <div class="row">
+                            <div class="form-group" id="vm-reccuring-member">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                       
+                                        <label style="font-size:15px;">Billing Date</label><input type="date"
+                                                                                                  ng-model-options="{timezone:'UTC'}"
+                                                                                                  required ng-model="donation.BillingDate"
+                                                                                                  name="vm-billingdate"
+                                                                                                  id="vm-donation-billingdate" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <label style="font-size:15px;">Select billing freqency</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="checkmark" required ng-model="donation.Frequency" value="3" name="selectFreq" id="vm-monthly-freq" />
+                                    <label class="form-check-label">
+                                        Monthly
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="checkmark" required ng-model="donation.Frequency" value="4" name="selectFreq" id="vm-quarterly-freq" />
+                                    <label class="form-check-label">
+                                        Quarterly
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="checkmark" required ng-model="donation.Frequency" value="5" name="selectFreq" id="vm-biannually-freq" />
+                                    <label class="form-check-label">
+                                        Biannually
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="checkmark" required ng-model="donation.Frequency" value="6" name="selectFreq" id="vm-annual-freq" />
+                                    <label class="form-check-label">
+                                        Annual
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        @*<input type="hidden" required ng-model="donation.DonatorType" class="form-control" id="vm-donation-donatortype">*@
+
+                    </section>
+                </div>
+            </div>
+            <div class="row vm-row">
+                <div class="container vm-form-border">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="vm-form-header">Your Details</h3>
+                            <div class="form-group">
+                                <label>In what capacity are you donating?</label> <br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="vm-name-radio-capacity" id="vm-id-radio-individual" ng-model="donation.DonorType" value="Individual" checked="">
+                                    <label class="form-check-label" for="vm-id-radio-individual">
+                                        Individual
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="vm-name-radio-capacity" id="vm-id-radio-organisation" ng-model="donation.DonorType" value="Organisation">
+                                    <label class="form-check-label" for="vm-id-radio-organisation">
+                                        Organisation
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <section id="vm-id-row-individual">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-individual-first-name">First name	*</label>
+                                    <input type="text" name="firstname" minlength="2" maxlength="50" ng-model="donation.DonorDetails.FirstName" class="form-control" required id="vm-individual-first-name">
+                                    <div ng-if="donationForm.firstname.$invalid && !donationForm.firstname.$pristine" class="invalid-feedback">
+                                        Please provide first name.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-individual-last-name">Last name *</label>
+                                    <input name="lastname" ng-model="donation.DonorDetails.Surname" maxlength="20" type="text" id="vm-individual-last-name" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        Please provide last name.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-individual-email">Email *</label>
+                                    <input name="iemail" type="email" maxlength="50" ng-model="donation.DonorDetails.ContactPersonEmail" id="vm-individual-email" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        Please provide email.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-individual-gender">Gender</label>
+                                    <select name="gender" ng-model="donation.DonorDetails.Gender" class="form-control" id="vm-individual-gender" required>
+                                        <option value="Female">Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-individual-address-1">Address</label>
+                                    <input name="address1i" type="text" maxlength="50" ng-model="donation.DonorDetails.Address1" class="form-control" id="vm-individual-address-1" required>
+                                    <div class="invalid-feedback">
+                                        Please provide address 1.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-individual-address-2">Address 2</label>
+                                    <input name="address2i" ng-model="donation.DonorDetails.Address2" maxlength="50" type="text" id="vm-individual-address-2" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        Please provide address 2
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-individual-city">City</label>
+                                    <input name="cityi" type="text" maxlength="50" ng-model="donation.DonorDetails.City" id="vm-individual-city" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        Please provide city.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-individual-state">Province</label>
+                                    <select name="statei" ng-model="donation.DonorDetails.State" id="vm-individual-state" class="form-control" name="vm-name-field-state">
+                                        <option value="Gauteng">Gauteng</option>
+                                        <option value="Eastern Cape">Eastern Cape</option>
+                                        <option value="Free State">Free State</option>
+                                        <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                                        <option value="Limpopo">Limpopo</option>
+                                        <option value="Mpumalanga">Mpumalanga</option>
+                                        <option value="North West">North West</option>
+                                        <option value="Northern Cape">Northern Cape</option>
+                                        <option value="Western Cape">Western Cape</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-individual-post-code">Postcode</label>
+                                    <input name="poi" type="number" class="form-control" ng-model="donation.DonorDetails.PostCode" id="vm-individual-post-code" required>
+                                    <div class="invalid-feedback">
+                                        Please provide post code.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-individual-country">Country</label>
+                                    <select name="countryi" ng-model="donation.DonorDetails.Country" id="vm-individual-country" ng-options="c as c for c in countries" name="country" class="form-control"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-individual-phone-number">Phone Number</label>
+                                    <input name="phonei" ng-model="donation.DonorDetails.ContactPersonPhoneNumber" type="tel" id="vm-individual-phone-number" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        Please provide phone number.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-individual-tax-number">Tax Number</label>
+                                    <input maxlength="15" name="taxi" ng-model="donation.DonorDetails.TaxNumber" type="text" class="form-control" id="vm-individual-tax-number" required>
+                                    <div class="invalid-feedback">
+                                        Please provide tax number.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Are you a PPS Member?</label> <br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" ng-model="donation.DonorDetails.IsMember" type="radio" name="vm-radio-existing_member" id="vm-individual-existing-member-yes" value="true" checked="">
+                                        <label class="form-check-label" for="vm-individual-existing-member-yes">
+                                            Yes
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input ng-model="donation.DonorDetails.IsMember" class="form-check-input" type="radio" name="vm-radio-existing_member" id="vm-individual-existing-member-no" value="false">
+                                        <label class="form-check-label" for="vm-individual-existing-member-no">
+                                            No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" id="vm-individual-group-member-number">
+                                    <label for="vm-individual-member-number">PPS Member number: (if selected yes)</label>
+                                    <input name="memberi" ng-model="donation.DonorDetails.MembershipNumber" maxlength="50" type="text" name="vm-member_number" id="vm-individual-member-number" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        Please provide member number.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="vm-id-row-organisation">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-organisation-name-of-organisation">Name of Organisation *</label>
+                                    <input name="org_name" type="text" maxlength="100" ng-model="donation.DonorDetails.CompanyName" id="vm-organisation-name-of-organisation" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        Please provide Name of Organisation.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-organisation-registration-number">Company Registration Number *</label>
+                                    <input name="org_reg" type="text" maxlength="20" id="vm-organisation-registration-number" ng-model="donation.DonorDetails.RegistrationNumber" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        Please provide Organisation Registration Number.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-organisation-contact-person">Contact Person	*</label>
+                                    <input name="org_person" ng-model="donation.DonorDetails.ContactPersonName" type="text" id="vm-organisation-contact-person" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                                    <div class="invalid-feedback">
+                                        Please provide Organisation Contact Person.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-organisation-contact-person-phone-number">Contact Person Phone Number *</label>
+                                    <input name="org_cphone" type="tel" id="vm-organisation-contact-person-phone-number" ng-model="donation.DonorDetails.ContactPersonPhoneNumber" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                                    <div class="invalid-feedback">
+                                        Please provide Organisation Contact Person Phone Number.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-organisation-contact-person-email">Email *</label>
+                                    <input name="org_cemail" ng-model="donation.DonorDetails.ContactPersonEmail" type="email" id="vm-organisation-contact-person-email" class="form-control ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required">
+                                    <div class="invalid-feedback">
+                                        Please provide Organisation Contact Person Email.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-organisation-email-18a">Email where the 18A must be sent*</label>
+                                    <input name="org_emailf" type="email" id="vm-organisation-email-18a" ng-model="donation.DonorDetails.CertificateEmail" class="form-control ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required">
+                                    <div class="invalid-feedback">
+                                        Please provide Email where the 18A must be sent.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-organisation-email">Organisation Email *</label>
+                                    <input name="org_emailo" type="email" ng-model="donation.DonorDetails.OrganizationEmail" id="vm-organisation-email" class="form-control ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required">
+                                    <div class="invalid-feedback">
+                                        Please provide Organisation Email.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-organisation-address-1">Organisation Address *</label>
+                                    <input name="org_add1" type="text" maxlength="50" ng-model="donation.DonorDetails.Address1" id="vm-organisation-address-1" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                                    <div class="invalid-feedback">
+                                        Please provide Organisation Address.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-organisation-address-2">Address 2 *</label>
+                                    <input name="org_add2" maxlength="50" type="text" ng-model="donation.DonorDetails.Address2" id="vm-organisation-address-2" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                                    <div class="invalid-feedback">
+                                        Please provide Organisation Address 2.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-organisation-city">City *</label>
+                                    <input name="org_city" type="text" ng-model="donation.DonorDetails.City" id="vm-organisation-city" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                                    <div class="invalid-feedback">
+                                        Please provide Organisation City.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-organisation-state">Province</label>
+                                    <select name="org_state" ng-model="donation.DonorDetails.State" class="form-control ng-pristine ng-untouched ng-valid" id="vm-organisation-state">
+                                        <option value="Other">Other</option>
+                                        <option value="Gauteng">Gauteng</option>
+                                        <option value="Eastern Cape">Eastern Cape</option>
+                                        <option value="Free State">Free State</option>
+                                        <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                                        <option value="Limpopo">Limpopo</option>
+                                        <option value="Mpumalanga">Mpumalanga</option>
+                                        <option value="North West">North West</option>
+                                        <option value="Northern Cape">Northern Cape</option>
+                                        <option value="Western Cape">Western Cape</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-organisation-post-code">Postcode *</label>
+                                    <input name="org_postcode" ng-model="donation.DonorDetails.PostCode" type="number" id="vm-organisation-post-code" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                                    <div class="invalid-feedback">
+                                        Please provide Organisation Postcode.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-organisation-country">Country</label>
+                                    <select name="org_country" ng-model="donation.DonorDetails.Country" ng-options="c as c for c in countries" class="form-control ng-pristine ng-untouched ng-valid" id="vm-organisation-country"><option value="0" label="Afghanistan">Afghanistan</option><option value="1" label="Albania">Albania</option><option value="2" label="Algeria">Algeria</option><option value="3" label="Andorra">Andorra</option><option value="4" label="Angola">Angola</option><option value="5" label="Anguilla">Anguilla</option><option value="6" label="Antigua &amp;amp; Barbuda">Antigua &amp;amp; Barbuda</option><option value="7" label="Argentina">Argentina</option><option value="8" label="Armenia">Armenia</option><option value="9" label="Aruba">Aruba</option><option value="10" label="Australia">Australia</option><option value="11" label="Austria">Austria</option><option value="12" label="Azerbaijan">Azerbaijan</option><option value="13" label="Bahamas">Bahamas</option><option value="14" label="Bahrain">Bahrain</option><option value="15" label="Bangladesh">Bangladesh</option><option value="16" label="Barbados">Barbados</option><option value="17" label="Belarus">Belarus</option><option value="18" label="Belgium">Belgium</option><option value="19" label="Belize">Belize</option><option value="20" label="Benin">Benin</option><option value="21" label="Bermuda">Bermuda</option><option value="22" label="Bhutan">Bhutan</option><option value="23" label="Bolivia">Bolivia</option><option value="24" label="Bosnia &amp;amp; Herzegovina">Bosnia &amp;amp; Herzegovina</option><option value="25" label="Botswana">Botswana</option><option value="26" label="Brazil">Brazil</option><option value="27" label="British Virgin Islands">British Virgin Islands</option><option value="28" label="Brunei">Brunei</option><option value="29" label="Bulgaria">Bulgaria</option><option value="30" label="Burkina Faso">Burkina Faso</option><option value="31" label="Burundi">Burundi</option><option value="32" label="Cambodia">Cambodia</option><option value="33" label="Cameroon">Cameroon</option><option value="34" label="Cape Verde">Cape Verde</option><option value="35" label="Cayman Islands">Cayman Islands</option><option value="36" label="Chad">Chad</option><option value="37" label="Chile">Chile</option><option value="38" label="China">China</option><option value="39" label="Colombia">Colombia</option><option value="40" label="Congo">Congo</option><option value="41" label="Cook Islands">Cook Islands</option><option value="42" label="Costa Rica">Costa Rica</option><option value="43" label="Cote D Ivoire">Cote D Ivoire</option><option value="44" label="Croatia">Croatia</option><option value="45" label="Cruise Ship">Cruise Ship</option><option value="46" label="Cuba">Cuba</option><option value="47" label="Cyprus">Cyprus</option><option value="48" label="Czech Republic">Czech Republic</option><option value="49" label="Denmark">Denmark</option><option value="50" label="Djibouti">Djibouti</option><option value="51" label="Dominica">Dominica</option><option value="52" label="Dominican Republic">Dominican Republic</option><option value="53" label="Ecuador">Ecuador</option><option value="54" label="Egypt">Egypt</option><option value="55" label="El Salvador">El Salvador</option><option value="56" label="Equatorial Guinea">Equatorial Guinea</option><option value="57" label="Estonia">Estonia</option><option value="58" label="Ethiopia">Ethiopia</option><option value="59" label="Falkland Islands">Falkland Islands</option><option value="60" label="Faroe Islands">Faroe Islands</option><option value="61" label="Fiji">Fiji</option><option value="62" label="Finland">Finland</option><option value="63" label="France">France</option><option value="64" label="French Polynesia">French Polynesia</option><option value="65" label="French West Indies">French West Indies</option><option value="66" label="Gabon">Gabon</option><option value="67" label="Gambia">Gambia</option><option value="68" label="Georgia">Georgia</option><option value="69" label="Germany">Germany</option><option value="70" label="Ghana">Ghana</option><option value="71" label="Gibraltar">Gibraltar</option><option value="72" label="Greece">Greece</option><option value="73" label="Greenland">Greenland</option><option value="74" label="Grenada">Grenada</option><option value="75" label="Guam">Guam</option><option value="76" label="Guatemala">Guatemala</option><option value="77" label="Guernsey">Guernsey</option><option value="78" label="Guinea">Guinea</option><option value="79" label="Guinea Bissau">Guinea Bissau</option><option value="80" label="Guyana">Guyana</option><option value="81" label="Haiti">Haiti</option><option value="82" label="Honduras">Honduras</option><option value="83" label="Hong Kong">Hong Kong</option><option value="84" label="Hungary">Hungary</option><option value="85" label="Iceland">Iceland</option><option value="86" label="India">India</option><option value="87" label="Indonesia">Indonesia</option><option value="88" label="Iran">Iran</option><option value="89" label="Iraq">Iraq</option><option value="90" label="Ireland">Ireland</option><option value="91" label="Isle of Man">Isle of Man</option><option value="92" label="Israel">Israel</option><option value="93" label="Italy">Italy</option><option value="94" label="Jamaica">Jamaica</option><option value="95" label="Japan">Japan</option><option value="96" label="Jersey">Jersey</option><option value="97" label="Jordan">Jordan</option><option value="98" label="Kazakhstan">Kazakhstan</option><option value="99" label="Kenya">Kenya</option><option value="100" label="Kuwait">Kuwait</option><option value="101" label="Kyrgyz Republic">Kyrgyz Republic</option><option value="102" label="Laos">Laos</option><option value="103" label="Latvia">Latvia</option><option value="104" label="Lebanon">Lebanon</option><option value="105" label="Lesotho">Lesotho</option><option value="106" label="Liberia">Liberia</option><option value="107" label="Libya">Libya</option><option value="108" label="Liechtenstein">Liechtenstein</option><option value="109" label="Lithuania">Lithuania</option><option value="110" label="Luxembourg">Luxembourg</option><option value="111" label="Macau">Macau</option><option value="112" label="Macedonia">Macedonia</option><option value="113" label="Madagascar">Madagascar</option><option value="114" label="Malawi">Malawi</option><option value="115" label="Malaysia">Malaysia</option><option value="116" label="Maldives">Maldives</option><option value="117" label="Mali">Mali</option><option value="118" label="Malta">Malta</option><option value="119" label="Mauritania">Mauritania</option><option value="120" label="Mauritius">Mauritius</option><option value="121" label="Mexico">Mexico</option><option value="122" label="Moldova">Moldova</option><option value="123" label="Monaco">Monaco</option><option value="124" label="Mongolia">Mongolia</option><option value="125" label="Montenegro">Montenegro</option><option value="126" label="Montserrat">Montserrat</option><option value="127" label="Morocco">Morocco</option><option value="128" label="Mozambique">Mozambique</option><option value="129" label="Namibia">Namibia</option><option value="130" label="Nepal">Nepal</option><option value="131" label="Netherlands">Netherlands</option><option value="132" label="Netherlands Antilles">Netherlands Antilles</option><option value="133" label="New Caledonia">New Caledonia</option><option value="134" label="New Zealand">New Zealand</option><option value="135" label="Nicaragua">Nicaragua</option><option value="136" label="Niger">Niger</option><option value="137" label="Nigeria">Nigeria</option><option value="138" label="Norway">Norway</option><option value="139" label="Oman">Oman</option><option value="140" label="Pakistan">Pakistan</option><option value="141" label="Palestine">Palestine</option><option value="142" label="Panama">Panama</option><option value="143" label="Papua New Guinea">Papua New Guinea</option><option value="144" label="Paraguay">Paraguay</option><option value="145" label="Peru">Peru</option><option value="146" label="Philippines">Philippines</option><option value="147" label="Poland">Poland</option><option value="148" label="Portugal">Portugal</option><option value="149" label="Puerto Rico">Puerto Rico</option><option value="150" label="Qatar">Qatar</option><option value="151" label="Reunion">Reunion</option><option value="152" label="Romania">Romania</option><option value="153" label="Russia">Russia</option><option value="154" label="Rwanda">Rwanda</option><option value="155" label="Saint Pierre &amp;amp; Miquelon">Saint Pierre &amp;amp; Miquelon</option><option value="156" label="Samoa">Samoa</option><option value="157" label="San Marino">San Marino</option><option value="158" label="Satellite">Satellite</option><option value="159" label="Saudi Arabia">Saudi Arabia</option><option value="160" label="Senegal">Senegal</option><option value="161" label="Serbia">Serbia</option><option value="162" label="Seychelles">Seychelles</option><option value="163" label="Sierra Leone">Sierra Leone</option><option value="164" label="Singapore">Singapore</option><option value="165" label="Slovakia">Slovakia</option><option value="166" label="Slovenia">Slovenia</option><option value="167" selected="selected" label="South Africa">South Africa</option><option value="168" label="South Korea">South Korea</option><option value="169" label="Spain">Spain</option><option value="170" label="Sri Lanka">Sri Lanka</option><option value="171" label="St Kitts &amp;amp; Nevis">St Kitts &amp;amp; Nevis</option><option value="172" label="St Lucia">St Lucia</option><option value="173" label="St Vincent">St Vincent</option><option value="174" label="St. Lucia">St. Lucia</option><option value="175" label="Sudan">Sudan</option><option value="176" label="Suriname">Suriname</option><option value="177" label="Swaziland">Swaziland</option><option value="178" label="Sweden">Sweden</option><option value="179" label="Switzerland">Switzerland</option><option value="180" label="Syria">Syria</option><option value="181" label="Taiwan">Taiwan</option><option value="182" label="Tajikistan">Tajikistan</option><option value="183" label="Tanzania">Tanzania</option><option value="184" label="Thailand">Thailand</option><option value="185" label="Timor L'Este">Timor L'Este</option><option value="186" label="Togo">Togo</option><option value="187" label="Tonga">Tonga</option><option value="188" label="Trinidad &amp;amp; Tobago">Trinidad &amp;amp; Tobago</option><option value="189" label="Tunisia">Tunisia</option><option value="190" label="Turkey">Turkey</option><option value="191" label="Turkmenistan">Turkmenistan</option><option value="192" label="Turks &amp;amp; Caicos">Turks &amp;amp; Caicos</option><option value="193" label="Uganda">Uganda</option><option value="194" label="Ukraine">Ukraine</option><option value="195" label="United Arab Emirates">United Arab Emirates</option><option value="196" label="United Kingdom">United Kingdom</option><option value="197" label="Uruguay">Uruguay</option><option value="198" label="Uzbekistan">Uzbekistan</option><option value="199" label="Venezuela">Venezuela</option><option value="200" label="Vietnam">Vietnam</option><option value="201" label="Virgin Islands (US)">Virgin Islands (US)</option><option value="202" label="Yemen">Yemen</option><option value="203" label="Zambia">Zambia</option><option value="204" label="Zimbabwe">Zimbabwe</option></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vm-organisation-phone-number">Phone Number *</label>
+                                    <input name="org_phn" type="tel" id="vm-organisation-phone-number" ng-model="donation.DonorDetails.ContactPersonPhoneNumber" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                                    <div class="invalid-feedback">
+                                        Please provide Organisation Phone Number.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Are you a PPS member?</label> <br>
+                                    <div class="form-check form-check-inline">
+                                        <input ng-model="donation.DonorDetails.IsMember" class="form-check-input ng-pristine ng-untouched ng-valid" type="radio" name="vm-pps-member" id="vm-organisation-pps-member-yes" value="true" checked="">
+                                        <label class="form-check-label" for="vm-organisation-pps-member-yes">
+                                            Yes
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input ng-pristine ng-untouched ng-valid" type="radio" name="vm-pps-member" ng-model="donation.DonorDetails.IsMember" id="vm-organisation-pps-member-no" value="false">
+                                        <label class="form-check-label" for="vm-organisation-pps-member-no">
+                                            No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" id="vm-organization-group-member-number">
+                                    <label for="vm-organisation-pps-member-number">PPS Member number: (if selected yes)</label>
+                                    <input type="text" maxlength="50" ng-model="donation.DonorDetails.MembershipNumber" id="vm-organisation-pps-member-number" class="form-control">
+                                    <div class="invalid-feedback">
+                                        Please provide member number.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="row vm-row vm-row-submit">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <input type="checkbox" name="comms" checked><a>I agree to receive regular updates from the PPS Foundation</a><br><br>
+                            <input type="checkbox" required name="terms"> I agree to the <a href="Terms">Terms and Conditions</a>
+                            <!--Check for default selection-->
+                            <input type="hidden" required ng-model="donation.StudentDetails.Id" name="0" ng-init="donation.StudentDetails.Id= 3" class="ng-pristine ng-untouched ng-valid-required">
+                            <br><br><button ng-if="donatebutton" class="btn btn-primary" type="submit">DONATE</button>
+                            {{message}}
+                            <div ng-if="loading">
+                                <img id="loading" style="width:10%" src=@Url.Content("~/Assets/img/loading.gif") alt="PPS Foundation Loading" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row vm-row-payments">
+                        <div class="col">
+                            <br>
+                            <p>SUPPORTED PAYMENT METHODS</p>
+                        </div>
+                    </div>
+                    <div class="row vm-row-payments">
+                        <div class="col">
+                            <img class="img-fluid" src="@Url.Content("~/Assets/img/methods.png")" alt=" SUPPORTED PAYMENT METHODS">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br /><br />
+        <form class="needs-validation" name="studentDonationForm" ng-submit="submitDonation(donationForm)" novalidate>
+            <hr class="solid" style="width:1100px; border-size:3px;">
+            <div class="row vm-row">
+                <div class="container">
+                    <div class="col">
+                        <h3 class="vm-form-header" style="font-weight:bold;">Students</h3>
+                        <br />
+                        <div class="row vm-row">
+                            <button class="collapsible">Bursary Programme</button>
+                            <div class="contentMenu">
+                                @if (Model.Count() == 0)
+                                {
+                                    <table>
+                                        <tr>
+                                            <td colspan="4">No rows match found </td>
+                                        </tr>
+                                    </table>
+                                }
+                                <br />
+                                @foreach (DataLayer.Core.AspNetStudent student in Model)
+                                {
+                                    @*<div class="containerM">*@
+                                    <div>
+                                        <ul class="list">
+                                            <li>
+                                                @*@Html.Hidden("StudentID", (object)ViewBag.StudentID)*@
+                                                @*@Html.Hidden("StudentID", (object)ViewBag.StudentID)*@
+                                                @Html.Hidden("studentHid", student.StudentID)
+                                                <input type="hidden" name="StudentID" value="@student.StudentID">
+                                                @*<img src="@Url.Action height="200" width="250" />*@
+                                                <div class="PictureStudentLeft">
+                                                    @if (student.Picture != null)
+                                                    {
+                                                        var base64 = Convert.ToBase64String(student.Picture);
+                                                        var exptention = "jpg";
+                                                        var imgscr = "";
+                                                        switch (exptention)
+                                                        {
+                                                            case "png":
+                                                                imgscr = string.Format("data:image/" + exptention + ";base64,{0}", base64);
+                                                                break;
+                                                            case "tiff":
+                                                                imgscr = string.Format("data:image/" + exptention + ";base64,{0}", base64);
+                                                                break;
+                                                            case "jpg":
+                                                                imgscr = string.Format("data:image/" + exptention + ";base64,{0}", base64);
+                                                                break;
+                                                            case "gif":
+                                                                imgscr = string.Format("data:image/" + exptention + ";base64,{0}", base64);
+                                                                break;
+                                                        }
+                                                        //"jpgpng|tiff|jpg|gif"
+                                                        <div>
+                                                            <br />
+                                                            <img src="@imgscr" alt="Image" class="imageDisplay" />
+                                                        </div>
+                                                        @*<img style="max-width:100px; max-height:100px;" src="data:image/*;base64,@(Convert.ToBase64String(student.Picture))">*@
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="imagesDiv">
+                                                            <br />
+                                                            <img src="~/Assets/img/methods.png" style="max-height:100px;max-width:200px;" />
+                                                        </div>
+                                                    }
+                                                </div><br />
+                                                <div class="Studentright">
+                                                    <div class="StyleDonation">
+                                                        <button class="btn btn-primary" style="width:127px;" onclick="window.location= '@Url.Action( "Student", "Home", new { 								student.StudentID })'">Donate</button>
+                                                        <table>
+                                                            <tr>
+                                                                <td>Required</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    R @(student.AmountofFundingNeeded.HasValue ? student.AmountofFundingNeeded.Value : 0.00)
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Received</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    R 0
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                </div>
+                                                <div class="studentbio">
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <span class="title">
+                                                                    @student.Firstname
+                                                                    @student.Lastname
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Current Institute Attending : @student.University
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Current Course : @student.Qualification
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="studentdetails">
+                                            <h5 style="font-weight:bold; font-size:15px;">More about my journey :</h5>
+                                            <p style="font-size:10px;">
+                                                Student Bio : @student.Bio <br />
+                                                Motivation : @student.Motivation<br />
+                                            </p>
+                                            <p style="font-size:10px;">
+                                                What is fund for : @student.WhatTheFundingWillBeUsedFor <br />
+                                                @(student.YearofRequest.HasValue ? student.YearofRequest.Value.ToString("MM/dd/yyyy") : "--/--/----")<br />
+                                                @(student.YearofStudy.HasValue ? student.YearofStudy.Value.ToString("MM/dd/yyyy") : "--/--/----") <br />
+                                                Total Average : @(student.AcademicAverage.HasValue ? student.AcademicAverage.Value : 0) <br />
+                                            </p>
+                                        </div>
+                                    </div><br />
+                                }
+                                <div class="pagination" style="text-align:center; position: relative; margin-left:450px;">
+                                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                    of @Model.PageCount
+                                </div>
+                                <div class="pagination" style="text-align:center; position:relative; margin-left:390px;">
+                                    @Html.PagedListPager(Model, page => Url.Action("Index",
+                                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                                </div>
+                            </div>
+
+                        </div>
+                    </div> <br />
+                    <div class="col">
+                        <h3 class="vm-form-header" style="font-weight:bold;">Academic Institutions</h3>
+                        <br />
+                        <div class="row vm-row">
+                            <button class="collapsible">University Support Programme</button>
+                            <div class="contentMenu">
+                                <br />
+                                <br />
+                                <div class="contentMenu-sub">
+                                    <button class="btn btn-primary">Donate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+
+@Scripts.Render("~/Assets/js/app-r")
+

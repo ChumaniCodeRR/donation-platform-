@@ -1,0 +1,29 @@
+﻿#barChart{
+    padding:15px !important;
+}
+
+.big-icon {
+    font-size: 40px;
+}
+
+#loading{
+
+    text-align: center;
+}
+.scrolltable{
+overflow: auto !important;
+}
+#myCarousel{
+    font-size:medium !important;
+}
+
+.label {
+    font-size: 90% !important;
+}
+#estimateval {
+  font-size: xx-large;
+}
+
+#unitPrice, #quanityV, #disclaimer {
+    font-size: x-large;
+}

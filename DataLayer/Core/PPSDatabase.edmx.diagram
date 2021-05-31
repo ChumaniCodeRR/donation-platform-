@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="23f0da303ea6470cad975024f9e23ac5" Name="Diagram1" ZoomLevel="63">
+        <EntityTypeShape EntityType="PPSDonationModel.C__MigrationHistory" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PPSDonationModel.AspNetRole" Width="1.5" PointX="5.75" PointY="9" />
+        <EntityTypeShape EntityType="PPSDonationModel.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="10.125" />
+        <EntityTypeShape EntityType="PPSDonationModel.AspNetUserLogin" Width="1.5" PointX="10.25" PointY="7.5" />
+        <EntityTypeShape EntityType="PPSDonationModel.AspNetUser" Width="1.5" PointX="8" PointY="7.125" />
+        <EntityTypeShape EntityType="PPSDonationModel.Donation" Width="1.5" PointX="5.25" PointY="1.875" />
+        <EntityTypeShape EntityType="PPSDonationModel.DonationCertificate" Width="1.5" PointX="7.5" PointY="2.375" />
+        <EntityTypeShape EntityType="PPSDonationModel.DonationStatu" Width="1.5" PointX="0.5" PointY="6.75" />
+        <EntityTypeShape EntityType="PPSDonationModel.Donor" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="PPSDonationModel.DonorType" Width="1.5" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="PPSDonationModel.sysdiagram" Width="1.5" PointX="9.75" PointY="3.75" />
+        <AssociationConnector Association="PPSDonationModel.FK__AspNetUse__UserI__01142BA1" />
+        <AssociationConnector Association="PPSDonationModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="PPSDonationModel.FK__Donation__Donati__398D8EEE" />
+        <AssociationConnector Association="PPSDonationModel.FK__Donation__DonorI__3A81B327" />
+        <AssociationConnector Association="PPSDonationModel.FK__DonationC__Donat__3F466844" />
+        <AssociationConnector Association="PPSDonationModel.FK__Donor__DonorType__20C1E124" />
+        <AssociationConnector Association="PPSDonationModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="PPSDonationModel.AspNetStudent" Width="1.5" PointX="3.125" PointY="8.25" />
+        <AssociationConnector Association="PPSDonationModel.AspNetStudentDonation" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

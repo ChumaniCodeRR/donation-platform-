@@ -1,0 +1,183 @@
+﻿
+   @{
+       if (User.IsInRole("Client"))
+       {
+           ViewBag.Title = "Open Orders";
+       }else
+       {
+           ViewBag.Title = "Stock";
+       }
+      
+       ViewBag.SubTitle = "";
+}
+    
+     @Styles.Render("~/Content/Stock/css-r")  
+     @Scripts.Render("~/Scripts/Stock/Main-r")
+
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Filters</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <label>Filter By Client</label>
+                        <span id="clients"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Filter By Supplier</label>
+                        <span id="suppliers"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Filter By Product</label>
+                        <span id="products"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Filter By Transporter</label>
+                        <span id="transporters"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Filter By PO Expiry</label>
+                        <input type="text" class="form-control" placeholder="Expiry" onkeyup="searchFunction(10, this)">
+                    </div>
+                    <div class="form-group">
+                        <label>Filter By Ref 1</label>
+                        <input type="text" class="form-control" placeholder="Ref 1" onkeyup="searchFunction(4, this)">
+                    </div>
+                    <div class="form-group">
+                        <label>Filter By Ref 2</label>
+                        <input type="text" class="form-control" placeholder="Ref 2" onkeyup="searchFunction(5, this)">
+                    </div>
+                    @*<div class="form-group">
+                        <input type="hidden" class="form-control pull-right" id="start">
+                        <input type="hidden" class="form-control pull-right" id="end">
+                        <label>Date range:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="reservation">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-info btn-flat" onclick="display()">View</button>
+                            </span>
+                        </div>
+                    </div>*@
+                    
+
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Filters</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <label>Filter By Status</label>
+                        <span id="status"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Filter By Swapped</label>
+                        <span id="swapped"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Filter By Sales Order</label>
+                        <input type="text" class="form-control" placeholder="Sales Order" onkeyup="searchFunction(8, this)">
+                    </div>
+                    <div class="form-group">
+                        <label>Filter By Purchase Order</label>
+                        <input id="myInput" type="text" class="form-control" placeholder="Order Number" onkeyup="searchFunction(2, this)">
+                    </div>
+                    <div class="form-group">
+                        <label>Filter By Date</label>
+                        <input type="text" class="form-control" placeholder="Date" onkeyup="searchFunction(0, this)">
+                    </div>
+                    <div class="form-group">
+                        <label>Filter By Date</label>
+                        <input type="text" class="form-control" placeholder="Sales Order Volume" onkeyup="searchFunction(8, this)">                        
+                    </div>
+                   
+                    
+                </div>
+
+            </div>
+           
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-md-6">
+                <div class="info-box">
+                    <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Total Liters For Filter</span>
+                        <span id="totalliters" class="info-box-number"></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+            </div>
+        </div>
+        <div class="table-title">
+            <h4 id="lastupdate"></h4>
+            <div class="row">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button id="refresh" class="btn btn-success btn-large fullwidth">Refresh</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <button id="expiring" onclick="refresh(null,'expiry_soon');" class="btn btn-success btn-large fullwidth">Expiring Soon</button>
+                    </div>
+                    <div class="col-lg-4">
+                        <button id="expiring" onclick="refresh(null,'expired');" class="btn btn-success btn-large fullwidth">Expired</button>
+                    </div>
+                    <div class="col-lg-4">
+                        @*<button id="export" class="btn btn-large" onclick="exportdata();">Export</button>*@
+                      
+                        
+                        <button type="submit" class="btn btn-success btn-large fullwidth" onclick="location.href='@Url.Action("Export", "Stock")'">Export</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="loading">
+            <img src="@Url.Content("~/Content/Images/pic/loading.gif")">
+            <p>Loading...</p>
+        </div>
+        <div class="container-fluid scrolltable">
+            <table id="tableData" class="table-fill">
+                <thead>
+
+                    
+                    <tr>
+                        <th class="text-left">Date</th>
+                        <th class="text-left">Supplier Account</th>
+                        <th class="text-left">Order Number</th>
+                        <th class="text-left">Client Name</th>
+                        <th class="text-left">Ref1</th>
+                        <th class="text-left">Ref2</th>                       
+                        <th class="text-left">Product</th>
+                        <th class="text-left">Sales Order</th>
+                        <th class="text-left">Ordered Volume</th>
+                        <th class="text-left">Transporter</th>
+                        <th class="text-left">PO Expiry</th>
+                        <th class="text-left">Status</th>
+                        @if (User.IsInRole("Admin"))
+                        {
+                        <th class="text-left">Swapped</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody id="location" class="table-hover"></tbody>
+            </table>
+        </div>
+
+

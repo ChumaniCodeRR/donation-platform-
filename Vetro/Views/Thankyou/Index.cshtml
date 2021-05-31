@@ -1,0 +1,210 @@
+﻿
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Required meta tags -->
+    @*<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">*@
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="~/Assets/css/app.css" type="text/css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+
+    <style>
+        .iamgestyle {
+            width: 395px;
+            height: 295px;
+            margin-top:-5px;
+        }
+        .Thank {
+            height: 500px;
+            padding-top: 50px;
+            margin-bottom: 40px;
+        }
+
+        .Thank-body {
+            font-size: 30px;
+            margin-left: 29%;
+            padding-top: 10px;
+            color: #aab7ba;
+        }
+
+        .Thank-inside {
+            margin-left: 250px;
+            align-items: center;
+            width: 400px;
+            height: 300px;
+            border: solid;
+            border-color: #B09455
+        }
+
+        .Thank-buttons {
+            padding-top: 20px;
+            margin-left: 280px;
+            color: #B09455;
+            display: inline-block;
+        }
+        @@media screen and (max-width:800px) {
+            .iamgestyle {
+                width: 250px;
+                height: 150px;
+                
+            }
+            .Thank {
+                height: 400px;
+                padding-top: 30px;
+                margin-bottom: 29px;
+            }
+
+            .Thank-body {
+                font-size: 25px;
+                margin-left: 20%;
+                padding-top: 10px;
+                color: #aab7ba;
+            }
+
+            .Thank-inside {
+                margin-left: 100px;
+                align-items: center;
+                width: 253px;
+                height: 154px;
+                border: solid;
+                border-color: #B09455
+            }
+
+            .Thank-buttons {
+                padding-top: 20px;
+                margin-left: 60px;
+                color: #B09455;
+                display: inline-block;
+            }
+
+        }
+        @@media screen and (max-width:480px) {
+            .iamgestyle {
+                width: 195px;
+                height: 117px;
+               
+            }
+            .Thank {
+                height: 400px;
+                padding-top: 30px;
+                margin-bottom: 29px;
+            }
+
+            .Thank-body {
+                font-size: 20px;
+                margin-left: 15%;
+                padding-top: 10px;
+                color: #aab7ba;
+            }
+
+            .Thank-inside {
+                margin-left: 100px;
+                align-items: center;
+                width: 200px;
+                height: 120px;
+                border: solid;
+                border-color: #B09455
+            }
+
+            .Thank-buttons {
+                padding-top: 15px;
+                margin-left: 40px;
+                color: #B09455;
+                display: inline-block;
+            }
+        }
+        @@media screen and (max-width:310px) {
+            .iamgestyle {
+                width: auto;
+                height: 50px;
+            }
+            .Thank {
+                height: 300px;
+                padding-top: 10px;
+                margin-bottom: 10px;
+            }
+            .Thank-body {
+                font-size: 20px;
+                margin-left: auto;
+                padding-top: 10px;
+                color: #aab7ba;
+            }
+
+            .Thank-inside {
+                margin-left: 40px;
+                align-items: center;
+                width: 183px;
+                height: 54px;
+                border: solid;
+                border-color: #B09455
+            }
+
+            .Thank-buttons {
+                padding-top: -5px;
+                margin-left: -5px;
+                color: #B09455;
+                display: inline-block;
+            }
+            .btn btn-primary {
+               width: 50px;
+            }
+        }
+
+
+
+    </style>
+
+    @Styles.Render("~/Assets/css/app-r")
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NHT45D6');</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <br />
+            <br />
+            <div class="col-md-12">
+                <div class="Thank">
+                    <div class="Thank-inside">
+                        <a class="navbar-brand" href="/home">
+                            <img src=@Url.Content("~/Assets/img/graduation-feature_1-2-820x400.jpg") class="iamgestyle" alt="PPS Foundation Logo" />
+                        </a>
+                    </div>
+                    <div class="Thank-body">
+                        Thank you for Donating
+                    </div>
+                    <div class="Thank-buttons">
+                        <button class="btn btn-primary" href="https://www.pps.co.za/foundation" role="button">FIND OUT MORE </button>
+                        <button class="btn btn-primary ml-5" href="http://ppsfoundation.pps.co.za/" role="button">DONATE AGAIN</button>
+                    </div>
+                </div>
+                <br />
+                <h2 class="vm-thank-you-h4">
+                    Thank you for making a donation. Your section S18A-Certificate will be emailed to you automatically.
+                </h2>
+            </div>
+        </div>
+    </div>
+</body>

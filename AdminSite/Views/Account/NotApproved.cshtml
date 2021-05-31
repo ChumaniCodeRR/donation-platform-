@@ -1,0 +1,45 @@
+﻿@model WebApplication.Models.LoginViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "Not Approved";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>WebApplication</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    @Styles.Render("~/AdminLTE/bootstrap/css-r")
+    @Styles.Render("~/AdminLTE/plugins/font-awesome/css-r")
+    @Styles.Render("~/AdminLTE/plugins/ionicons/css-r")
+    @Styles.Render("~/AdminLTE/dist/css-r")
+    @Styles.Render("~/AdminLTE/plugins/icheck/css/sqare/blue-r")
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#">Welcome to <b>PPS Donation Admin</b></a>
+        </div>
+        <div class="login-box-body">
+            <p class="text-danger">You account has not been approved by the system administrator. Please contact I.T. support</p>
+        </div>
+    </div>
+
+    @Scripts.Render("~/AdminLTE/plugins/jquery/js-r")
+    @Scripts.Render("~/AdminLTE/bootstrap/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/icheck/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/jquery-validate/js-r")
+    @Scripts.Render("~/Scripts/Account/Login-r")
+
+</body>
+</html>

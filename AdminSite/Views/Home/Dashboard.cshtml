@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Home/DashboardV1/menu-r")
+}
+
+@Styles.Render("~/AdminLTE/plugins/morris/css-r")
+@Styles.Render("~/AdminLTE/plugins/jvectormap/css-r")
+@Styles.Render("~/AdminLTE/plugins/datepicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/daterangepicker/css-r")
+@Styles.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/css-r")
+
+
+<div class="row">
+    <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-blue">
+            <div class="inner">
+                <h3>R @(Model.TotalDonations)</h3>
+                <p>Total Completed Donations</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a href="@Url.Action("DonationAdmin", "DonationAdmin").Replace("/Home", "")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-blue">
+            <div class="inner">
+                <h3>R @(Model.TotalDonationStudent)</h3>
+                <p>Amount of funding needed</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-android-contacts"></i>
+            </div>
+            <a href="@Url.Action("DonationAdmin", "DonationAdmin").Replace("/Home", "")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-5">
+        <div class="small-box bg-blue">
+            <div class="inner">
+                <h3>R@(Model.TotalDonationForTheDay)</h3>
+                <p>Total Donation for the day</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-toggle-filled"></i>
+            </div>
+            <a href="@Url.Action("DonationAdmin", "DonationAdmin").Replace("/Home", "")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-lg-3 col-xs-5">
+        <div class="small-box bg-blue">
+            <div class="inner">
+                <h3>.</h3>
+                <p>Show donation for each student</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-eye-disabled"></i>
+            </div>
+            <a href="@Url.Action("EachStudentDonationDashboard", "Home")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            @*<h3>Students</h3>
+
+                @for (var i = 0; i <= Model.EachDonation - 1; i++)
+                {
+                    <p>@Model[i]</p>
+                }*@
+
+            @*<p>@Model.EachDonation</p>*@
+            @*@foreach (var t in Model.EachDonation)
+                {
+                    <p>@t.Firstname</p>
+                }*@
+
+        </div>
+    </div>
+    @*<div class="col-lg-1">
+            <div class="info-box bg-blue-active">
+                <div class="box-body">
+                    <h3>Donation</h3>
+                    <p>Amount</p>
+                </div>
+            </div>
+        </div>*@
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/plugins/jquery-ui/js-r")
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+
+    @Scripts.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/sparkline/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/jvectormap/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/daterangepicker/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/knob/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/raphael/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/morris/js-r")
+    @Scripts.Render("~/AdminLTE/plugins/datepicker/js-r")
+    @Scripts.Render("~/Scripts/Home/DashboardV1-r")
+}

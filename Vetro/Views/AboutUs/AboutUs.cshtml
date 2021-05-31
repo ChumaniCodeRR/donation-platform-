@@ -1,0 +1,80 @@
+﻿@model string
+@Html.AntiForgeryToken()
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Required meta tags -->
+    @*<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">*@
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="~/Assets/js/app.js" type="text/javascript"></script>
+    <link href="~/Assets/css/app.css" type="text/css" />
+
+
+    @Styles.Render("~/Assets/css/app-r")
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NHT45D6');</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+    <div ng-controller="homeCtrl">
+        <form name="studentDonationForm">
+            <div class="row vm-row">
+                <div class="container">
+                    <div class="col">
+                        <h3>Our Story</h3>
+                        <p>
+                            Founded in 1941, PPS is the only mutual financial
+
+                            services company in South Africa that focuses
+
+                            exclusively on graduate professionals, providing
+
+                            tailor-made insurance, investment and
+
+                            healthcare solutions to our members. <br />
+
+
+                            We’re recognised as a company of value and
+
+                            integrity by lawyers, doctors, accountants, engineers
+
+                            and many other professions that know PPS is
+
+                            exclusively there for them and their families through
+
+                            every life stage – from graduation to retirement and beyond.
+                        </p>
+                    </div>
+                    <div class="col">
+                        <h3>About PPS Foundation</h3>
+                        <p>
+                            The PPS Foundation was established in 2016 with the primary purpose of improving access to STEM (Science, Technology, Engineering and Maths) fields,
+
+                            and to make a measurable contribution to the sustainable development of South African communities through
+
+                            PPS’s ethos of mutuality and shared success.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>

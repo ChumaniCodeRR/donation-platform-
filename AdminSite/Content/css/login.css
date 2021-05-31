@@ -1,0 +1,11 @@
+﻿.login-page, .register-page {
+    background-image: url("../Images/pic/loginbackground.jpg") !important;
+    background-size: cover;
+}
+
+img.logostart{
+
+    background: white;
+    width: 52%;
+    box-shadow: 3px 4px grey;
+}
